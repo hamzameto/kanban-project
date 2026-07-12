@@ -45,7 +45,7 @@ public class CardService {
 
         checkOwnership(list, username);
 
-        return cardRepository.findByListId(listId)
+        return cardRepository.findByListIdOrderByPositionAsc(listId)
                 .stream()
                 .map(this::toResponse)
                 .toList();

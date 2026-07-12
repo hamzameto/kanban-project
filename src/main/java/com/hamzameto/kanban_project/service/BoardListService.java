@@ -43,7 +43,7 @@ public class BoardListService {
 
         checkOwnership(board, username);
 
-        return boardListRepository.findByBoardId(boardId)
+        return boardListRepository.findByBoardIdOrderByPositionAsc(boardId)
                 .stream()
                 .map(this::toResponse)
                 .toList();
