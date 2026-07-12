@@ -1,8 +1,8 @@
 package com.hamzameto.kanban_project.controller;
 
-import com.hamzameto.kanban_project.dto.BoardListRequest;
-import com.hamzameto.kanban_project.dto.BoardListUpdateRequest;
-import com.hamzameto.kanban_project.service.BoardListService;
+import com.hamzameto.kanban_project.dto.CardRequest;
+import com.hamzameto.kanban_project.dto.CardUpdateRequest;
+import com.hamzameto.kanban_project.service.CardService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/boardlists")
-public class BoardListController {
+@RequestMapping("/api/cards")
+public class CardController {
 
     @Autowired
-    private BoardListService boardListService;
+    private CardService cardService;
 
     @PostMapping
-    public ResponseEntity<?> createBoardList(@Valid @RequestBody BoardListRequest request, Authentication auth) {
+    public ResponseEntity<?> createCard(@Valid @RequestBody CardRequest request, Authentication auth) {
         try {
-            return ResponseEntity.ok(boardListService.createBoardList(request, auth.getName()));
+            return ResponseEntity.ok(cardService.createCard(request, auth.getName()));
         } catch (SecurityException e) {
             return ResponseEntity.status(403).body(Map.of("error", e.getMessage()));
         } catch (IllegalArgumentException e) {
@@ -29,10 +29,10 @@ public class BoardListController {
         }
     }
 
-    @GetMapping("/board/{boardId}")
-    public ResponseEntity<?> getListsForBoard(@PathVariable Long boardId, Authentication auth) {
+    @GetMapping("/list/{listId}")
+    public ResponseEntity<?> getCardsForList(@PathVariable Long listId, Authentication auth) {
         try {
-            return ResponseEntity.ok(boardListService.getListsForBoard(boardId, auth.getName()));
+            return ResponseEntity.ok(cardService.getCardsForList(listId, auth.getName()));
         } catch (SecurityException e) {
             return ResponseEntity.status(403).body(Map.of("error", e.getMessage()));
         } catch (IllegalArgumentException e) {
@@ -41,9 +41,9 @@ public class BoardListController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateBoardList(@PathVariable Long id, @Valid @RequestBody BoardListUpdateRequest request, Authentication auth) {
+    public ResponseEntity<?> updateCard(@PathVariable Long id, @Valid @RequestBody CardUpdateRequest request, Authentication auth) {
         try {
-            return ResponseEntity.ok(boardListService.updateBoardList(id, request, auth.getName()));
+            return ResponseEntity.ok(cardService.updateCard(id, request, auth.getName()));
         } catch (SecurityException e) {
             return ResponseEntity.status(403).body(Map.of("error", e.getMessage()));
         } catch (IllegalArgumentException e) {
@@ -52,10 +52,10 @@ public class BoardListController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBoardList(@PathVariable Long id, Authentication auth) {
+    public ResponseEntity<?> deleteCard(@PathVariable Long id, Authentication auth) {
         try {
-            boardListService.deleteBoardList(id, auth.getName());
-            return ResponseEntity.ok(Map.of("message", "List deleted successfully"));
+            cardService.deleteCard(id, auth.getName());
+            return ResponseEntity.ok(Map.of("message", "Card deleted successfully"));
         } catch (SecurityException e) {
             return ResponseEntity.status(403).body(Map.of("error", e.getMessage()));
         } catch (IllegalArgumentException e) {

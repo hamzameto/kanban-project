@@ -1,6 +1,7 @@
 package com.hamzameto.kanban_project.service;
 
 import com.hamzameto.kanban_project.dto.BoardListRequest;
+import com.hamzameto.kanban_project.dto.BoardListUpdateRequest;
 import com.hamzameto.kanban_project.dto.BoardListResponse;
 import com.hamzameto.kanban_project.entity.Board;
 import com.hamzameto.kanban_project.entity.BoardList;
@@ -48,7 +49,7 @@ public class BoardListService {
                 .toList();
     }
 
-    public BoardListResponse updateBoardList(Long id, BoardListRequest request, String username) {
+    public BoardListResponse updateBoardList(Long id, BoardListUpdateRequest request, String username) {
         BoardList list = boardListRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("List not found"));
 
