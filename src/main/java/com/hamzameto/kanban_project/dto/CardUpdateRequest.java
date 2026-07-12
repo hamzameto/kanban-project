@@ -11,4 +11,6 @@ public class CardUpdateRequest {
     private String description;
 
     private Integer position;
+
+    private Long listId;
 }

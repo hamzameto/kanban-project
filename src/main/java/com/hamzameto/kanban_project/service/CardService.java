@@ -61,6 +61,15 @@ public class CardService {
         card.setDescription(request.getDescription());
         card.setPosition(request.getPosition());
 
+        if (request.getListId() != null && !request.getListId().equals(card.getList().getId())) {
+            BoardList newList = boardListRepository.findById(request.getListId())
+                    .orElseThrow(() -> new IllegalArgumentException("Target list not found"));
+
+            checkOwnership(newList, username);
+
+            card.setList(newList);
+        }
+
         Card updated = cardRepository.save(card);
 
         return toResponse(updated);
