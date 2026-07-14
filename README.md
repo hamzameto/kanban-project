@@ -16,6 +16,13 @@ Frontend repo: [kanban-frontend](https://github.com/hamzameto/kanban-frontend)
 - Fully containerized with Docker Compose
 - Automated CI pipeline (build + test) via GitHub Actions
 
+## Live Demo
+
+- Frontend: https://kanban-frontend-llrm.onrender.com
+- Backend API: https://kanban-backend-t473.onrender.com
+
+Note: hosted on Render's free tier — the backend may take 30–60 seconds to wake up on the first request after a period of inactivity.
+
 ## Tech Stack
 
 **Backend**
